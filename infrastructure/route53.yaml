@@ -1,0 +1,26 @@
+Description: >
+  Create a Route53 alias record
+
+Parameters:
+  HostedZoneId:
+    Type: String
+
+  HostedZoneName:
+    Type: String
+
+  RecordName:
+    Type: String
+
+  DNSTarget:
+    Type: String
+
+Resources:
+  AliasRecord:
+    Type: "AWS::Route53::RecordSet"
+    Properties:
+      HostedZoneName: !Ref HostedZoneName
+      Name: !Ref RecordName
+      Type: A
+      AliasTarget:
+        HostedZoneId: !Ref HostedZoneId
+        DNSName: !Sub dualstack.${DNSTarget}
